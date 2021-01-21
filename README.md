@@ -11,23 +11,24 @@ with regular expressions.
 ## Usage
 
 ```php
-
 use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 use johnnynotsolucky\RegexHandler\Handler as RegexHandler;
-
 
 $handler = new RegexHandler([
     '/^spam log$/', // Match on the message
-    ['level_name', '^(INFO|DEBUG)$'], // Match on the level_name
-    [['context', 'email'], '/@domain\.com/'] // Match on context->email
+    ['level_name', '/^(INFO|DEBUG)$/'], // Match on the level_name
+    [['context', 'email'], '/@domain\.com$/'] // Match on context->email
 ]);
 
 $log = new Logger('test');
+
+$log->pushHandler(new StreamHandler('php://stdout'));
 $log->pushHandler($handler);
 
 $log->warning('spam log');  // Discarded
 $log->info('message'); // INFO and DEBUG logs are discarded
-$log->warning('message', ['email' => 'someone@domain.com']); // Matched on email
+$log->warning('message', ['email' => 'someone@domain.com']); // Discarded on email
 ```
 
 ## License
