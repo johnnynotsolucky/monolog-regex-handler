@@ -8,6 +8,12 @@ with regular expressions.
 - PHP ^7.2 or ^8
 - Monolog ^2.0
 
+## Installation
+
+```bash
+composer require johnnynotsolucky/monolog-regex-handler:^1.0
+```
+
 ## Usage
 
 ```php
