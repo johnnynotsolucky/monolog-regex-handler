@@ -19,7 +19,7 @@ use johnnynotsolucky\RegexHandler\Handler as RegexHandler;
 $handler = new RegexHandler([
     '/^spam log$/', // Match on the message
     ['level_name', '^(INFO|DEBUG)$'], // Match on the level_name
-    [['extra', 'property'], '/something/'] // Match on value at `extra->property`
+    [['context', 'email'], '/@domain\.com/'] // Match on context->email
 ]);
 
 $log = new Logger('test');
@@ -27,6 +27,7 @@ $log->pushHandler($handler);
 
 $log->warning('spam log');  // Discarded
 $log->info('message'); // INFO and DEBUG logs are discarded
+$log->warning('message', ['email' => 'someone@domain.com']); // Matched on email
 ```
 
 ## License
