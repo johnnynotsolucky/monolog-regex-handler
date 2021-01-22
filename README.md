@@ -14,6 +14,12 @@ with regular expressions.
 composer require johnnynotsolucky/monolog-regex-handler:^1.0
 ```
 
+## Motivation
+
+> But why do I need to filter out logs when I control the logs?
+
+Sometimes you don't 😢.
+
 ## Usage
 
 ```php
